@@ -6,6 +6,7 @@ The Restaurant Order Management System is a project aimed at streamlining the or
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Modules Used:**
+
 Tkinter - Tkinter is a python module that provides a simple and efficient way to create Graphical User Interfaces using the Tk GUI Toolkit. It is a wrapper around the Tk toolkit which is written in C and is native to Python Interpreter
 
 Time - The time module is a built in Python library that provides functions for working with times and dates. It includes functions for getting the current time, measuring time intervals and formatting time strings
@@ -15,6 +16,7 @@ FIledialog - The filedialog module in Tkinter provides convenient functions for 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Defined Functions:**
+
 save_order_details(): Saves customer and order details to a specified text file, including customer information, ordered items, and the total bill.
 
 apply_label_style(): v
@@ -36,7 +38,22 @@ finish_payment(): Calls and displays the customer and bill details when the Fini
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Algorithm:**
+
 The user interface of the Restaurant Order Management System is built using Python (Tkinter GUI). The frontend is designed to be intuitive and user-friendly, allowing restaurant staff to easily navigate and interact with the system. Tkinter is used to enhance the user experience by providing dynamic and interactive elements. Flowchart image attached.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+**Results and Discussion: **
+
+The implementation of the Restaurant Order Management System can lead to improvements in efficiency of restaurant staff.
+
+Increased Efficiency
+The system significantly improved the efficiency of the order management process. Orders can be processed faster and more accurately, reducing errors and delays. This will lead to improved customer satisfaction and increased revenue.
+
+Customer Insights
+The system generated valuable customer insights through data analysis. It captured order history, which can be used to personalize the dining experience and improve customer retention.
+
+Future Enhancements
+Based on the findings, future enhancements to the system can include integration with online ordering platforms, loyalty programs, and automated reporting for better business analytics. It can also be integrated into micro bill machines to streamline the billing process.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
