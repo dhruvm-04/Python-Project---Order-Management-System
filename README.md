@@ -22,6 +22,7 @@ save_order_details(): Saves customer and order details to a specified text file,
 apply_label_style(): v
 
 apply_button_style(): Applies a common style to Tkinter labels, buttons, entry boxes like font and background color.
+
 apply_entry_style(): ^
 
 create_frame(): Creates and returns a Tkinter frame with a specified background color.
