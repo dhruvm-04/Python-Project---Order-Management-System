@@ -5,7 +5,7 @@ The Restaurant Order Management System is a project aimed at streamlining the or
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**Modules Used:**
+#**Modules Used:**
 
 Tkinter - Tkinter is a python module that provides a simple and efficient way to create Graphical User Interfaces using the Tk GUI Toolkit. It is a wrapper around the Tk toolkit which is written in C and is native to Python Interpreter
 
@@ -15,7 +15,7 @@ FIledialog - The filedialog module in Tkinter provides convenient functions for 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**Defined Functions:**
+#**Defined Functions:**
 
 save_order_details(): Saves customer and order details to a specified text file, including customer information, ordered items, and the total bill.
 
@@ -37,13 +37,13 @@ finish_payment(): Calls and displays the customer and bill details when the Fini
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**Algorithm:**
+#**Algorithm:**
 
 The user interface of the Restaurant Order Management System is built using Python (Tkinter GUI). The frontend is designed to be intuitive and user-friendly, allowing restaurant staff to easily navigate and interact with the system. Tkinter is used to enhance the user experience by providing dynamic and interactive elements. Flowchart image attached.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**Results and Discussion: **
+#**Results and Discussion:**
 
 The implementation of the Restaurant Order Management System can lead to improvements in efficiency of restaurant staff.
 
