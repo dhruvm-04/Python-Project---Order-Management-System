@@ -20,6 +20,7 @@ FIledialog - The filedialog module in Tkinter provides convenient functions for 
 save_order_details(): Saves customer and order details to a specified text file, including customer information, ordered items, and the total bill.
 
 apply_label_style(): v
+
 apply_button_style(): Applies a common style to Tkinter labels, buttons, entry boxes like font and background color.
 apply_entry_style(): ^
 
