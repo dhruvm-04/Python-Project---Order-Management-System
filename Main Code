@@ -1,0 +1,243 @@
+import time
+from tkinter import *
+from tkinter import filedialog
+
+# Set the common font
+common_font = ('Open Sans', 15)
+
+# Set the common background color
+bg_color = "#121212"
+
+def save_order_details(customer_name, phone_number, email, order_details, total_bill):
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
+
+    if file_path:
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write("Customer Details:\n")
+            file.write(f"Name: {customer_name}\n")
+            file.write(f"Phone Number: {phone_number}\n")
+            file.write(f"Email: {email}\n\n")
+            seconds=time.time()
+            file.write(time.ctime(seconds))
+            file.write('\n')
+
+            file.write("Ordered Items:\n")
+            for cuisine, items in order_details.items():
+                file.write(f"{cuisine}:\n")
+                for item, details in items.items():
+                    quantity = details["quantity"]
+                    price = details["price"]
+                    if quantity > 0:
+                        file.write(f"{item} - {quantity} x ₹{price} = ₹{price * quantity}\n")   
+                file.write("\n")
+
+            file.write(f"Total Bill: ₹{total_bill:.2f}\n")
+            file.write("------------------------------------------------------\n\n")
+
+
+def apply_label_style(label):
+    label.config(font=('Open Sans', 15, 'italic'), bg=bg_color)
+
+def apply_button_style(button):
+    button.config(font=('Open Sans', 15, 'italic'), bg="#4CAF50", activebackground="#45a049")
+
+def apply_entry_style(entry):
+    entry.config(font=('Open Sans', 15, 'italic'))
+
+def create_frame(window, bg_color="#121212"):
+    frame = Frame(window, bg=bg_color)
+    return frame
+
+def italian_menu_page(order_details, welcome_window, customer_name, phone_number, email):
+    italian_window = Toplevel(welcome_window)
+    italian_window.geometry("800x700")
+    italian_window.title("Italian Menu")
+
+    panzanella_var = IntVar()
+    pizza_var = IntVar()
+    lasagne_var = IntVar()
+    bruschetta_var = IntVar()
+    carbonara_var = IntVar()
+    bolognese_var = IntVar()
+    pomodoro_var = IntVar()
+    ravioli_var = IntVar()
+    risotto_var = IntVar()
+    tiramisu_var = IntVar()
+    springroll_var = IntVar()
+    dimsum_var = IntVar()
+    manchurian_var = IntVar()
+    hakkanoodles_var = IntVar()
+    manchowsoup_var = IntVar()
+    fuyoung_var = IntVar()
+    wontonsoup_var = IntVar()
+    schezwannoodles_var = IntVar()
+    leefoorice_var = IntVar()
+    steamedrice_var = IntVar()
+    def calculate_bill():
+        items = {
+            "Panzanella": panzanella_var.get(),
+            "Pizza": pizza_var.get(),
+            "Lasagne": lasagne_var.get(),
+            "Bruschetta": bruschetta_var.get(),
+            "Carbonara": carbonara_var.get(),
+            "Bolognese": bolognese_var.get(),
+            "Pomodoro": pomodoro_var.get(),
+            "Ravioli": ravioli_var.get(),
+            "Risotto": risotto_var.get(),
+            "Tiramisu": tiramisu_var.get(),
+            "Springroll": springroll_var.get(),
+            "Dimsum": dimsum_var.get(),
+            "Manchurian": manchurian_var.get(),
+            "Hakkanoodles": hakkanoodles_var.get(),
+            "Manchowsoup": manchowsoup_var.get(),
+            "Fuyoung": fuyoung_var.get(),
+            "Wontonsoup": wontonsoup_var.get(),
+            "Schezwannoodles": schezwannoodles_var.get(),
+            "Leefoorice": leefoorice_var.get(),
+            "Steamedrice": steamedrice_var.get(),
+        }
+
+        total_amount = 0
+        order_details["Italian"] = {}
+
+        for item, quantity in items.items():
+            if quantity > 0:
+                price = item_prices[item]
+                total_amount += quantity * price
+                order_details["Italian"][item] = {"quantity": quantity, "price": price}
+
+        gst_amount = 0.05 * total_amount
+        total_bill = total_amount + gst_amount
+
+        italian_window.destroy()
+        payment_page(order_details, gst_amount, total_amount, total_bill, welcome_window, customer_name, phone_number, email)
+
+    frame = create_frame(italian_window)
+
+    Label(frame, text="Italian Menu", font=('Open Sans', 30, 'italic', 'bold'), bg=bg_color, fg='#5EFFE4').grid(row=0, column=0, columnspan=3, pady=20, padx=20)
+    Label(frame, text="Chinese Menu", font=('Open Sans', 30, 'italic', 'bold'), bg=bg_color, fg='#5EFFE4').grid(row=0, column=4, columnspan=3, pady=20, padx=20)
+
+    item_prices = {
+        "Panzanella": 199,
+        "Pizza": 299,
+        "Lasagne": 599,
+        "Bruschetta": 399,
+        "Carbonara": 199,
+        "Bolognese": 199,
+        "Pomodoro": 249,
+        "Ravioli": 399,
+        "Risotto": 399,
+        "Tiramisu": 299,
+        "Springroll": 299,
+        "Dimsum": 249,
+        "Manchurian": 199,
+        "Hakkanoodles": 299,
+        "Manchowsoup": 349,
+        "Fuyoung": 499,
+        "Wontonsoup": 299,
+        "Schezwannoodles": 499,
+        "Leefoorice": 399,
+        "Steamedrice": 149,
+    }
+
+    for i, (item, price) in enumerate(item_prices.items()):
+        if i<10:
+            Label(frame, text=f"{item}", font=('Open Sans', 18, 'italic', 'bold'), bg=bg_color, fg='#5EFFE4', anchor="w").grid(row=i + 1, column=0, padx=20, pady=5, sticky='w')
+            Label(frame, text=f"₹{price}", font=('Open Sans', 18, 'italic', 'bold'), bg=bg_color, fg='#5EFFE4', anchor="w").grid(row=i + 1, column=1, padx=20, pady=5, sticky='w')
+            Spinbox(frame, from_=0, to=10, textvariable=locals()[f"{item.lower()}_var"], font=('Open Sans', 18), width=2).grid(row=i + 1, column=2, pady=5, padx=20, sticky="w")
+        else:
+            Label(frame, text=f"{item}", font=('Open Sans', 18, 'italic', 'bold'), bg=bg_color, fg='#5EFFE4', anchor="w").grid(row=i - 9, column=4, padx=20, pady=5, sticky='w')
+            Label(frame, text=f"₹{price}", font=('Open Sans', 18, 'italic', 'bold'), bg=bg_color, fg='#5EFFE4', anchor="w").grid(row=i - 9, column=5, padx=20, pady=5, sticky='w')
+            Spinbox(frame, from_=0, to=10, textvariable=locals()[f"{item.lower()}_var"], font=('Open Sans', 18), width=2).grid(row=i - 9, column=6, pady=5, padx=20, sticky="w")
+            
+    Button(frame, text="Place Order", font=('Open Sans', 18, 'italic', 'bold'), bg='#121212', fg='#5EFFE4', command=calculate_bill).grid(row=len(item_prices) + 1, column=0, columnspan=7, pady=20)
+
+    frame.pack(expand=True, fill='both')
+
+
+def payment_page(order_details, gst_amount, total_amount, total_bill, welcome_window, customer_name, phone_number, email):
+    # Constants
+    bg_color = "#121212"
+    text_color = "#5EFFE4"
+
+    payment_window = Toplevel(welcome_window)
+    payment_window.geometry("300x700")
+    payment_window.title("Order Details")
+
+    frame = create_frame(payment_window, bg_color)
+
+    Label(frame, text="Order Details", font=('Open Sans', 20, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+
+    # Display customer details
+    seconds=time.time()
+    Label(frame, text="-------------------------------------------", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+    Label(frame, text=time.ctime(seconds), font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+    Label(frame, text=f"Name: {customer_name.get()}", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+    Label(frame, text=f"Phone Number: {phone_number.get()}", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+    Label(frame, text=f"Email: {email.get()}", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+    Label(frame, text="-------------------------------------------", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+
+    # Display order details
+    for cuisine, items in order_details.items():
+        Label(frame, text=f"Ordered Items", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+        for item, details in items.items():
+            quantity = details["quantity"]
+            price = details["price"]
+            if quantity > 0:
+                Label(frame, text=f"{item}   -   {quantity}   x   ₹{price}"  + "  =  ₹" + str(price*quantity), font=('Open Sans', 10, 'bold'), bg=bg_color, fg=text_color).pack()
+
+    Label(frame, text=f"Total Amount: ₹{total_amount:.2f}", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+    Label(frame, text=f"GST @ 5%: ₹{gst_amount:.2f}", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+    Label(frame, text=f"Total Bill: ₹{total_bill:.2f}", font=('Open Sans', 15, 'italic', 'bold'), bg=bg_color, fg=text_color).pack()
+
+    def finish_payment():
+        save_order_details(customer_name.get(), phone_number.get(), email.get(), order_details, total_bill)
+        payment_window.destroy()
+
+    Button(frame, text="Finish", font=('Open Sans', 15, 'italic', 'bold'), command=finish_payment, bg=bg_color, fg=text_color).pack(pady=10)
+
+    frame.pack(expand=True, fill='both')
+
+def welcome_page():
+    welcome_window = Tk()
+    welcome_window.geometry("750x450")
+    welcome_window.title("Welcome to the Restaurant")
+
+    customer_name = StringVar()
+    phone_number = StringVar()
+    email = StringVar()
+
+    order_details = {"Italian": {}}
+
+    def open_italian_menu_page():
+        italian_menu_page(order_details, welcome_window, customer_name, phone_number, email)
+        
+    frame = create_frame(welcome_window)
+
+    Label(frame, text="        Restaurant Order", font=('Open Sans', 30, 'italic', 'bold'), bg="#121212",fg='#5EFFE4').grid(row=0, column=0, columnspan=10, pady=10, padx=100)
+
+    Label(frame, text="       Management System", font=('Open Sans', 30, 'italic', 'bold'), bg="#121212",fg='#5EFFE4').grid(row=1, column=0, columnspan=10, pady=2, padx=100)
+
+    Label(frame, text="--------------------------------------------------------------------------------------------------------------------------------------", font=('Open Sans', 10, 'italic', 'bold'), bg="#121212",fg='#5EFFE4').grid(row=2, column=0, padx=100, columnspan=100, pady=10)
+
+    Label(frame, text="Enter your details:", font=('Open Sans', 20, 'italic', 'bold'), bg="#121212",fg='#5EFFE4').grid(row=3, column=0, columnspan=3, pady=10, padx=100, sticky='w')
+
+    Label(frame, font=('Open Sans', 15, 'italic', 'bold'), text="Name:", bg="#121212", fg='#5EFFE4').grid(row=4, column=0, sticky='w', padx=100)
+    Entry(frame, textvariable=customer_name, width=35).grid(row=4, column=1, pady=10, columnspan=2)
+
+    Label(frame, text="Phone Number:", anchor='w', font=('Open Sans', 15, 'italic', 'bold'), bg="#121212",
+          fg='#5EFFE4').grid(row=5, column=0, padx=100, sticky='w')
+    Entry(frame, textvariable=phone_number, width=35).grid(row=5, column=1, pady=10, columnspan=2)
+
+    Label(frame, text="Email:", anchor='w', font=('Open Sans', 15, 'italic', 'bold'), bg="#121212",
+          fg='#5EFFE4').grid(row=6, column=0, sticky='w', padx=100)
+    Entry(frame, textvariable=email, width=35).grid(row=6, column=1, pady=10, columnspan=2)
+
+    Button(frame, text="Open Menu", font=('Open Sans', 15, 'italic', 'bold'), bg="#121212", fg='#5EFFE4',
+           command=open_italian_menu_page).grid(row=7, column=1, columnspan=2, pady=10)
+
+    frame.pack(expand=True, fill='both')
+
+    welcome_window.mainloop()
+
+welcome_page()
